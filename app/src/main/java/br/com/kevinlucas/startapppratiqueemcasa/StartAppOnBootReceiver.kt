@@ -6,11 +6,12 @@ import android.content.Intent
 
 class StartAppOnBootReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        if (Intent.ACTION_BOOT_COMPLETED.equals(intent?.action)) {
-            val it =
-                context?.packageManager?.getLaunchIntentForPackage("com.fortram.pratiqueemcasa")
-            it?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context?.startActivity(it)
+        if (Intent.ACTION_USER_PRESENT == intent?.action ||
+            Intent.ACTION_SCREEN_ON == intent?.action
+        ) {
+            val intent = Intent(context, MainActivity::class.java)
+            context?.startActivity(intent)
         }
     }
+
 }
