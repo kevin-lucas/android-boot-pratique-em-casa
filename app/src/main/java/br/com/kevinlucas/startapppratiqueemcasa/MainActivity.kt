@@ -9,6 +9,8 @@ import android.content.IntentFilter
 
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
+import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -18,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var textInstalled: TextView
     private lateinit var imageInstalled: ImageView
-    //private lateinit var textStoreInstalled: TextView
+    private lateinit var textLink: TextView
 
     private lateinit var textInternet: TextView
     private lateinit var imageInternet: ImageView
@@ -33,14 +35,14 @@ class MainActivity : AppCompatActivity() {
 
         textInstalled = findViewById(R.id.tv_installed)
         imageInstalled = findViewById(R.id.iv_alert)
-        //textStoreInstalled = findViewById(R.id.tv_store)
-
+        textLink = findViewById(R.id.tv_link)
         textInternet = findViewById(R.id.tv_internet)
         imageInternet = findViewById(R.id.iv_internet)
-
         textStatusOk = findViewById(R.id.text_success)
 
+        // sets visibility
         textStatusOk.visibility = View.INVISIBLE
+        textLink.visibility = View.INVISIBLE
 
         setupInternetLabels(false)
         setupAppLabels(false)
@@ -49,14 +51,30 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (isInternetAvailable() && isAppInstalled(this, appPackage)) {
-            setupStatusOk()
-            startServiceRc()
+        if (!isInternetAvailable()){
+            setupInternetLabels(isVisible = true)
+        }
+
+        if (!isAppInstalled(this, appPackage)){
+            setupAppLabels(isVisible = true)
+        }
+
+        if (!checkSDKVersionUp10()) {
+            if (isInternetAvailable() && isAppInstalled(this, appPackage)) {
+                setupStatusOk()
+                startServiceRc()
+            } else {
+                stopServiceRc()
+            }
         } else {
-            stopServiceRc()
+            textStatusOk.visibility = View.VISIBLE
+            textStatusOk.text = getString(R.string.incompatible)
         }
 
     }
+
+    private fun checkSDKVersionUp10() = Build.VERSION.SDK_INT > 28
+
 
     private fun startServiceRc() {
         val service = Intent(this, StartAppOnBootReceiverService::class.java)
@@ -91,20 +109,25 @@ class MainActivity : AppCompatActivity() {
             textInstalled.visibility = View.VISIBLE
             imageInstalled.visibility = View.VISIBLE
 
+            textLink.visibility = View.VISIBLE
+            textLink.text = getString(R.string.see_store)
+            textLink.setOnClickListener {
+                val url =
+                    "https://play.google.com/store/apps/details?id=com.fortram.pratiqueemcasa"
+                val it = Intent(Intent.ACTION_VIEW)
+                it.data = Uri.parse(url)
+                startActivity(it)
+            }
+
             textInstalled.text =
                 getString(R.string.app_not_installed)
 
         } else {
+            textLink.visibility = View.INVISIBLE
             textInstalled.visibility = View.INVISIBLE
             imageInstalled.visibility = View.INVISIBLE
         }
 
-    }
-
-    private fun openPratiqueApp() {
-        val it = packageManager?.getLaunchIntentForPackage(appPackage)
-        it?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(it)
     }
 
     private fun isAppInstalled(context: Context, packageName: String): Boolean {
@@ -115,7 +138,6 @@ class MainActivity : AppCompatActivity() {
         } catch (e: PackageManager.NameNotFoundException) {
         }
 
-        setupAppLabels(isVisible = true)
         return false
     }
 
@@ -124,10 +146,6 @@ class MainActivity : AppCompatActivity() {
             applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
         connectivityManager.activeNetworkInfo.also {
-
-            if (!(it != null && it.isConnected)) {
-                setupInternetLabels(isVisible = true)
-            }
 
             return it != null && it.isConnected
         }

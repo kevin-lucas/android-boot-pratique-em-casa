@@ -9,9 +9,10 @@
         Internet não está conectada, para o funcionamento correto do app mantenha o dispositivo conectado a internet.
     </string>
     <string name="app_not_installed">
-        O aplicativo Pratique em Casa não está instalado neste dispositivo, gentileza realizar o download na Google Play
+        O aplicativo Pratique em Casa não está instalado neste dispositivo, gentileza realizar o download na Google Play.
     </string>
-    <string name="app_open_in_store">Ver na loja</string>
+    <string name="see_store">Ver na loja</string>
     <string name="status_ok">Tudo certo ;)</string>
+    <string name="incompatible">:( Infelizmente a versão do Android deste dispositivo é incompatível com esse app.</string>
 
 </resources>

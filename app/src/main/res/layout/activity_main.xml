@@ -11,11 +11,10 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/iv_logo" />
 
     <TextView
         android:id="@+id/tv_installed"
@@ -25,18 +24,17 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_alert"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_alert"
         app:layout_constraintTop_toTopOf="@+id/iv_alert" />
 
     <TextView
         android:id="@+id/textView"
+        style="@style/TextViewAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/author"
-        style="@style/TextViewAuthor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -47,12 +45,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
         android:layout_marginEnd="8dp"
         android:text="TextView 2"
         app:layout_constraintBottom_toBottomOf="@+id/iv_internet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_internet"
-        app:layout_constraintTop_toTopOf="@+id/iv_internet" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_link" />
 
     <ImageView
         android:id="@+id/iv_alert"
@@ -69,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_alert"
         app:srcCompat="@drawable/ic_wifi" />
@@ -77,12 +76,25 @@
     <TextView
         android:id="@+id/text_success"
         style="@style/TextViewDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:text="TextView"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_internet" />
+
+    <TextView
+        android:id="@+id/tv_link"
+        style="@style/TextViewLink"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/tv_installed"
+        app:layout_constraintStart_toStartOf="@+id/tv_installed"
+        app:layout_constraintTop_toBottomOf="@+id/tv_installed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
