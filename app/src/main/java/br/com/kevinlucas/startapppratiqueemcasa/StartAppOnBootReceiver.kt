@@ -3,15 +3,18 @@ package br.com.kevinlucas.startapppratiqueemcasa
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 
 class StartAppOnBootReceiver : BroadcastReceiver() {
-    override fun onReceive(context: Context?, intent: Intent?) {
-        if (Intent.ACTION_USER_PRESENT == intent?.action ||
-            Intent.ACTION_SCREEN_ON == intent?.action
-        ) {
-            val intent = Intent(context, MainActivity::class.java)
-            context?.startActivity(intent)
-        }
-    }
 
+    val appPackage = "com.fortram.pratiqueemcasa"
+
+    override fun onReceive(context: Context?, intent: Intent?) {
+
+        Log.d("Script", "ACTION_SCREEN_OFF");
+
+        val it = context?.packageManager?.getLaunchIntentForPackage(appPackage)
+        it?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        context?.startActivity(it)
+    }
 }

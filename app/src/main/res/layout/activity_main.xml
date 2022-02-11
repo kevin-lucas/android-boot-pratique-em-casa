@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/primaryColor"
     android:layout_height="match_parent"
+    android:background="@color/primaryColor"
     tools:context=".MainActivity">
 
     <ImageView
@@ -18,28 +18,71 @@
         app:srcCompat="@drawable/logo" />
 
     <TextView
+        android:id="@+id/tv_installed"
+        style="@style/TextViewDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_alert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_alert"
+        app:layout_constraintTop_toTopOf="@+id/iv_alert" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:text="by Kevin Lucas"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:text="@string/author"
+        style="@style/TextViewAuthor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_internet"
+        style="@style/TextViewDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:textAlignment="center"
-        android:text="@string/description_app"
-        android:textColor="@color/primaryTextColor"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="TextView 2"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_internet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_internet"
+        app:layout_constraintTop_toTopOf="@+id/iv_internet" />
+
+    <ImageView
+        android:id="@+id/iv_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/ic_alert" />
+
+    <ImageView
+        android:id="@+id/iv_internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_alert"
+        app:srcCompat="@drawable/ic_wifi" />
+
+    <TextView
+        android:id="@+id/text_success"
+        style="@style/TextViewDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_internet" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

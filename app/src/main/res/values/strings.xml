@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">InicializadorPratiqueEmCasa</string>
+    <string name="author">by Kevin Lucas</string>
     <string name="description_app">
         O aplicativo Pratique em Casa será inicializado sempre que o dispositivo for iniciado.
     </string>
+
+    <string name="internet_status_disconect">
+        Internet não está conectada, para o funcionamento correto do app mantenha o dispositivo conectado a internet.
+    </string>
+    <string name="app_not_installed">
+        O aplicativo Pratique em Casa não está instalado neste dispositivo, gentileza realizar o download na Google Play
+    </string>
+    <string name="app_open_in_store">Ver na loja</string>
+    <string name="status_ok">Tudo certo ;)</string>
+
 </resources>

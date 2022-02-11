@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.kevinlucas.startapppratiqueemcasa">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
 
     <application
         android:allowBackup="true"
@@ -11,9 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.StartAppPratiqueEmCasa">
-        <activity
-            android:name=".MainActivity2"
-            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -24,15 +23,19 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".StartAppOnBootReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.ACTION_USER_PRESENT" />
-                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
-                <action android:name="android.intent.action.SCREEN_ON" />
-            </intent-filter>
-        </receiver>
+        <service android:enabled="true" android:name=".StartAppOnBootReceiverService" />
+
+        <!--        <receiver-->
+<!--            android:name=".StartAppOnBootReceiver"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <category android:name="android.intent.category.DEFAULT" />-->
+<!--                <action android:name="android.intent.action.ACTION_USER_PRESENT" />-->
+<!--                <action android:name="android.intent.action.ACTION_SHUTDOWN" />-->
+<!--                <action android:name="android.intent.action.SCREEN_ON" />-->
+<!--                <action android:name="android.intent.action.SCREEN_OFF" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
     </application>
 
 </manifest>
