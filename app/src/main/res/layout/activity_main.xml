@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="@+id/iv_alert" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/text_author"
         style="@style/TextViewAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

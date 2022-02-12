@@ -10,9 +10,6 @@ class StartAppOnBootReceiver : BroadcastReceiver() {
     val appPackage = "com.fortram.pratiqueemcasa"
 
     override fun onReceive(context: Context?, intent: Intent?) {
-
-        Log.d("Script", "ACTION_SCREEN_OFF");
-
         val it = context?.packageManager?.getLaunchIntentForPackage(appPackage)
         it?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context?.startActivity(it)

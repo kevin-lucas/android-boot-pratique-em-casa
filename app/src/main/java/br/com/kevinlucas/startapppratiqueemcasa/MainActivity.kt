@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -26,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var imageInternet: ImageView
 
     private lateinit var textStatusOk: TextView
+    private lateinit var textAuthor: TextView
 
     val appPackage = "com.fortram.pratiqueemcasa"
 
@@ -40,6 +40,16 @@ class MainActivity : AppCompatActivity() {
         imageInternet = findViewById(R.id.iv_internet)
         textStatusOk = findViewById(R.id.text_success)
 
+        textAuthor = findViewById(R.id.text_author)
+
+        textAuthor.setOnClickListener {
+            val url =
+                "https://kevinlucas.com.br"
+            val it = Intent(Intent.ACTION_VIEW)
+            it.data = Uri.parse(url)
+            startActivity(it)
+        }
+
         // sets visibility
         textStatusOk.visibility = View.INVISIBLE
         textLink.visibility = View.INVISIBLE
@@ -51,15 +61,16 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (!isInternetAvailable()){
-            setupInternetLabels(isVisible = true)
-        }
-
-        if (!isAppInstalled(this, appPackage)){
-            setupAppLabels(isVisible = true)
-        }
-
         if (!checkSDKVersionUp10()) {
+
+            if (!isInternetAvailable()){
+                setupInternetLabels(isVisible = true)
+            }
+
+            if (!isAppInstalled(this, appPackage)){
+                setupAppLabels(isVisible = true)
+            }
+
             if (isInternetAvailable() && isAppInstalled(this, appPackage)) {
                 setupStatusOk()
                 startServiceRc()
@@ -149,5 +160,19 @@ class MainActivity : AppCompatActivity() {
 
             return it != null && it.isConnected
         }
+    }
+
+    private fun registerBootCompleteReceiver(){
+        val filter = IntentFilter()
+        filter.addCategory(Intent.CATEGORY_DEFAULT)
+        filter.addAction(Intent.ACTION_BOOT_COMPLETED)
+        filter.addAction(Intent.ACTION_REBOOT)
+        filter.addAction(Intent.ACTION_USER_PRESENT)
+        filter.addAction(Intent.ACTION_SCREEN_ON)
+        filter.addAction(Intent.ACTION_SHUTDOWN)
+
+        val rc = StartAppOnBootCompleteReceiver()
+
+        registerReceiver(rc, filter)
     }
 }

@@ -30,7 +30,6 @@ class StartAppOnBootReceiverService : Service() {
         val filter = IntentFilter()
         filter.addCategory(Intent.CATEGORY_DEFAULT)
         filter.addAction(Intent.ACTION_USER_PRESENT)
-        filter.addAction(Intent.ACTION_SCREEN_OFF)
         filter.addAction(Intent.ACTION_SCREEN_ON)
         filter.addAction(Intent.ACTION_SHUTDOWN)
 
