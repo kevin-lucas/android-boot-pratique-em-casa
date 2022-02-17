@@ -73,9 +73,9 @@ class MainActivity : AppCompatActivity() {
 
             if (isInternetAvailable() && isAppInstalled(this, appPackage)) {
                 setupStatusOk()
-                startServiceRc()
+                //startServiceRc()
             } else {
-                stopServiceRc()
+                //stopServiceRc()
             }
         } else {
             textStatusOk.visibility = View.VISIBLE

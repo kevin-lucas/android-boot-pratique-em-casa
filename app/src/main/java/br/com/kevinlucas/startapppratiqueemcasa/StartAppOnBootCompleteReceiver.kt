@@ -3,6 +3,7 @@ package br.com.kevinlucas.startapppratiqueemcasa
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 
 class StartAppOnBootCompleteReceiver : BroadcastReceiver() {
 
@@ -10,7 +11,9 @@ class StartAppOnBootCompleteReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        startActivityMain(context)
+        //startActivityMain(context)
+
+        registerScreenOffReceiver(context!!)
 
         val it = context?.packageManager?.getLaunchIntentForPackage(appPackage)
         it?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -25,5 +28,18 @@ class StartAppOnBootCompleteReceiver : BroadcastReceiver() {
     private fun startServiceRc(context: Context?) {
 //        val service = Intent(context, StartAppOnBootReceiverService::class.java)
 //        context?.startService(service)
+    }
+
+    private fun registerScreenOffReceiver(context: Context?){
+        val filter = IntentFilter()
+        filter.addCategory(Intent.CATEGORY_DEFAULT)
+        filter.addAction(Intent.ACTION_USER_PRESENT)
+        filter.addAction(Intent.ACTION_SCREEN_ON)
+        filter.addAction(Intent.ACTION_SCREEN_OFF)
+        // filter.addAction(Intent.ACTION_SHUTDOWN)
+
+        val rc = StartAppOnBootReceiver()
+
+        context?.registerReceiver(rc, filter)
     }
 }
